@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
   });
   
   // route to get all saved notes from db.json 
+
   app.get('/api/notes', (req, res) => {
     // read the db.json file
     fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
@@ -31,8 +32,11 @@ app.get('/', (req, res) => {
   });
   
   // route to save a new note to db.json 
+
   app.post('/api/notes', (req, res) => {
-    // Read the db.json file
+    
+    // read the db.json file
+
     fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
       if (err) {
         console.error(err);
@@ -42,6 +46,7 @@ app.get('/', (req, res) => {
       const notes = JSON.parse(data);
       
       // generate a unique id for the new note (you can use a package like 'uuid' for this)
+
       const newNote = {
         id: generateUniqueId(), // Replace with the actual id generation logic
         title: req.body.title,
@@ -51,6 +56,7 @@ app.get('/', (req, res) => {
       notes.push(newNote);
       
       // write the updated notes to db.json 
+
       fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(notes), 'utf8', (err) => {
         if (err) {
           console.error(err);
